@@ -24,7 +24,6 @@ class ReverbData(object):
         print('Google Speech Dataset successfully loaded.')
         print()
 
-
     def separate_dataset(self):
         """
         Separates the dataset into speech/noise.
@@ -55,7 +54,7 @@ class ReverbData(object):
     def init_reverb_model(self):
         self.reverb_model = reverb_model.ReverbModel()
         # example_audio_sample = self.raw_only_speech[0].meta.file_loc
-        self.reverb_model.init_reverb_model()
+        self.reverb_model.reverb_model1()
 
     def apply_reverb(self):
         print('Applying reverberation algorithm to the whole dataset : ')
