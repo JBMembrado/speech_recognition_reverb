@@ -22,8 +22,8 @@ def load_speech_dataset(subset, playsound=False, noplot=True):
     args = parser.parse_args()
 
     # create a subset of the Google Speech Commands dataset that contains 10 of each word and the noise samples
-    data_path = '../tensorflow-master/tensorflow/examples/speech_commands/data'
-    dataset = pra.datasets.GoogleSpeechCommands(basedir=data_path, download=False, subset=subset)
+    data_path = '/tensorflow-master/tensorflow/examples/speech_commands/data'
+    dataset = pra.datasets.GoogleSpeechCommands(basedir= os.getcwd() + '/' + data_path, download=False, subset=subset)
 
     # print dataset info and first 10 entries
     print(dataset)
