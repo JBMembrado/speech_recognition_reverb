@@ -18,3 +18,4 @@ This part is represented by the folder real_time, inside which we can find:
 - real_time.py : file to run in order to see our real time classification
 - label_wav_realtime.py : runs the tensorflow graph in order to make predictions.
 - conv_labels.txt : loaded by label_wav_realtime to have the labels
+-first_model_graph_anechoic.pb : the tensorflow graph weights that were first trained
