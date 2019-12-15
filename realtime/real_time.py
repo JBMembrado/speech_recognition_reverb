@@ -1,9 +1,10 @@
-#!/usr/bin/env python3
-"""Plot the live microphone signal(s) with matplotlib.
+
+"""Plot the live microphone signal(s) with matplotlib, and classifies the word spoken out of 10 known keywords
 
 Matplotlib and NumPy have to be installed.
+This was adapted from an example given on sounddevice. """
 
-"""
+
 import argparse
 import queue
 import sys
@@ -90,8 +91,6 @@ def update_plot(frame):
         shift = len(data)
         plotdata = np.roll(plotdata, -shift, axis=0)
         plotdata[-shift:, :] = data
-        #header=bytes('RIFF$}\x00\x00WAVEfmt \x10\x00\x00\x00\x01\x00\x01\x00\x80>\x00\x00\x00}\x00\x00\x02\x00\x10\x00data\x00}\x00','utf8')
-        #wavconv.write('wavfile', 16000, plotdata)
 
     sf.write('wavfile.wav', plotdata, 16000, subtype='PCM_16',format='wav')
     with open('wavfile.wav', 'rb') as wav_file:
@@ -111,10 +110,6 @@ def update_plot(frame):
 
 try:
 
-    #if args.samplerate is None:
-     #   device_info = sd.query_devices(args.device, 'input')
-      #  args.samplerate = device_info['default_samplerate']
-    #print(args.samplerate)
     args.samplerate=16000
 
     length = int(args.window * args.samplerate / (1000 * args.downsample))
