@@ -1,8 +1,6 @@
 from __future__ import print_function
-import time
 import numpy as np
 import pyroomacoustics as pra
-from scipy.io import wavfile
 
 
 class ReverbModel(object):
@@ -48,7 +46,7 @@ class ReverbModel(object):
         self.mic = pra.MicrophoneArray(np.array([[2, 1.5, 2]]).T, self.shoebox.fs)
 
     def reverb_model3(self, absorption = 0.2, max_order = 15):
-        self.room_dimensions = [6, 5, 7]
+        self.room_dimensions = [8, 7, 9]
         self.absorption = absorption
         self.max_order = max_order
         self.fs = 16000
@@ -61,7 +59,7 @@ class ReverbModel(object):
         )
 
         self.source_position = [2, 3.1, 2]
-        self.mic = pra.MicrophoneArray(np.array([[4, 1.5, 4]]).T, self.shoebox.fs)
+        self.mic = pra.MicrophoneArray(np.array([[6, 1.5, 6]]).T, self.shoebox.fs)
 
     def reverb_model4(self, absorption = 0.2, max_order = 15):
         self.room_dimensions = [6, 5, 7]
@@ -78,6 +76,38 @@ class ReverbModel(object):
 
         self.source_position = [2, 3.1, 2]
         self.mic = pra.MicrophoneArray(np.array([[5, 0.5, 5]]).T, self.shoebox.fs)
+
+    def no_reverb(self):
+        self.room_dimensions = [2, 2, 2]
+        self.absorption = absorption
+        self.max_order = max_order
+        self.fs = 16000
+
+        self.shoebox = pra.ShoeBox(
+            self.room_dimensions,
+            absorption=self.absorption,
+            fs=self.fs,
+            max_order=self.max_order,
+        )
+
+        self.source_position = [2, 3.1, 2]
+        self.mic = pra.MicrophoneArray(np.array([[2, 1.5, 2]]).T, self.shoebox.fs)
+
+    def reverb_model_generic(self, room_dimensions, source_position, mic_position, absorption = 0.15, max_order = 15):
+        self.room_dimensions = room_dimensions
+        self.absorption = absorption
+        self.max_order = max_order
+        self.fs = 16000
+
+        self.shoebox = pra.ShoeBox(
+            self.room_dimensions,
+            absorption=self.absorption,
+            fs=self.fs,
+            max_order=self.max_order,
+        )
+
+        self.source_position = source_position
+        self.mic = pra.MicrophoneArray(np.array([mic_position]).T, self.shoebox.fs)
 
     def transform_audio(self, audio_sample, output_path):
         """
